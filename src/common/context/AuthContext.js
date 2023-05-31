@@ -1,12 +1,17 @@
-import { useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import * as Google from 'expo-auth-session/providers/google'
+
 import { signInWithCredential, GoogleAuthProvider } from 'firebase/auth'
 
 import Constants from 'expo-constants'
 
+// import { makeRedirectUri } from "expo-auth-session";
+
 import { auth } from '../../services/firebase'
 
-export function useAuth() {
+export const AuthContext = createContext({ user: null, signIn: () => {}, signOut: () => {}, loading: false })
+
+export function AuthProvider({children}) {
     const [user, setUser] = useState(null)
     const [token, setToken] = useState('')
     const [loading, setLoading] = useState(false)
@@ -15,17 +20,19 @@ export function useAuth() {
         androidClientId: Constants.manifest.extra.firebaseWebClientId,
         iosClientId: Constants.manifest.extra.firebaseIosClientId,
         expoClientId: Constants.manifest.extra.firebaseWebClientId,
+    // TODO: Implementar a nova metodologia de redirecionamento
     // redirectUri: makeRedirectUri({
     //   scheme: 'linksme'
     // }) your-scheme://expo-development-client/?url=https://u.expo.dev/your-eas-build-project-id?channel-name=your-channel-name
     })
 
     function signIn() {
-      setLoading(true)
-      promptAsync()
+        setLoading(true)
+        promptAsync()
     }
     function signOut() {
-      setUser(null)
+        setUser(null)
+        setToken('')
     }
 
     useEffect(() => {
@@ -41,10 +48,18 @@ export function useAuth() {
         }
     }, [response, token])
 
-    return {
-        user,
-        signIn,
-        signOut,
-        loading
-    }
+    return (
+        <AuthContext.Provider value={{
+            user,
+            signIn,
+            signOut,
+            loading
+        }}>
+            {children}
+        </AuthContext.Provider>
+    )
+}
+
+export function useAuth() {
+  return useContext(AuthContext)
 }
