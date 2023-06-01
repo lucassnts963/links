@@ -1,10 +1,10 @@
-import { AuthProvider } from './src/common/context/AuthContext'
-import { HomeView } from './src/views/Home'
+import { AuthProvider } from "./src/common/context/AuthContext";
+import { RootNavigator } from "./src/navigation/_rootNavigation";
 
 export default function App() {
   return (
     <AuthProvider>
-      <HomeView />
+      <RootNavigator />
     </AuthProvider>
-    )
+  );
 }

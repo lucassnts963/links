@@ -11,20 +11,25 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "1.17.11",
     "dotenv": "^16.1.1",
-    "expo": "~48.0.18",
+    "expo": "^48.0.19",
     "expo-application": "~5.1.1",
     "expo-auth-session": "~4.0.3",
+    "expo-clipboard": "~4.1.2",
     "expo-constants": "~14.2.1",
     "expo-crypto": "~12.2.1",
+    "expo-linking": "^4.0.1",
     "expo-status-bar": "~1.4.4",
     "expo-web-browser": "~12.1.1",
     "firebase": "^9.22.1",
+    "install": "^0.13.0",
     "react": "18.2.0",
     "react-native": "0.71.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@rocketseat/eslint-config": "^1.2.0",
     "eslint": "^8.41.0",
     "eslint-plugin-react": "^7.32.2"
   },
