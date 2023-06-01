@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Button, TextInput, FlatList, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 
 import { ref, push } from 'firebase/database'
 
 import { database as db } from '../../services/firebase'
+
+import {TextInput} from '../../common/components/atoms/TextInput'
+import {Button} from '../../common/components/atoms/Button'
 
 import { useAuth } from '../../common/context/AuthContext'
 import { useLinks } from '../../common/hooks/useLinks'
